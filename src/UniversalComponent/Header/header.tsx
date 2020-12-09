@@ -22,7 +22,7 @@ export function Header() {
    }, [token])
     const signOut = () => {
         dispatch(logout())
-        push('/todoapp')
+        push('/')
     }
 
     return (

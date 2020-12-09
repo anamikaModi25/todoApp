@@ -23,7 +23,7 @@ export function Login() {
 
     useEffect(() => {
         if(token !== "SIGNOUT"){
-            push("/todoapp/todo")
+            push("/todo")
         }
     }, [token])
 
@@ -50,7 +50,7 @@ export function Login() {
                     isClosable: true,
                   })
             }else{
-                push("/todoapp/todo")
+                push("/todo")
             }
             }
         )
@@ -70,7 +70,7 @@ export function Login() {
                         <Input type="password" name="password" value={formState.password} onChange={handleChange}/>
                     </FormControl>
                     <Button colorScheme="teal" mt={10} onClick={submit}>{isLoading ? "...loading": "Login"}</Button>
-                    <Text><Link to="/todoapp/signup">Sign Up</Link></Text>
+                    <Text><Link to="/signup">Sign Up</Link></Text>
                 </Box>
             </Grid>
         </Box>
