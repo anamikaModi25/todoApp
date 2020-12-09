@@ -26,7 +26,7 @@ export function Header() {
     }
 
     return (
-        <Box bg={bg} p={2}>
+        <Box bg={bg} p={2} shadow="md" >
             <HStack>
             <Spacer/><ColorModeSwitcher justifySelf="flex-end" />
             <Text mx={4}>{user.name}</Text>

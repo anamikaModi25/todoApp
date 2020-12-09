@@ -1,4 +1,4 @@
-import { ColorModeScript } from "@chakra-ui/react"
+import { ColorModeScript, CSSReset, extendTheme, Theme } from "@chakra-ui/react"
 import * as React from "react"
 import ReactDOM from "react-dom"
 import {
@@ -11,12 +11,24 @@ import reportWebVitals from "./reportWebVitals"
 import * as serviceWorker from "./serviceWorker"
 import { Provider } from "react-redux";
 import { store } from "./Utils/store";
+import './app.scss';
+import { mode } from '@chakra-ui/theme-tools';
+
+const customTheme = extendTheme({
+  styles: {
+    global: (props: any) => ({
+      body: {
+        bg: mode("rgb(251 250 250 / 98%)", 'gray.900')(props)
+      }
+    })
+  }
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ColorModeScript />
-      <ChakraProvider theme={theme}>
+      <ChakraProvider theme={customTheme}>
         <App />
       </ChakraProvider>
     </Provider>

@@ -9,7 +9,7 @@ import { allTasks } from '../Slice/taskSlice';
 import { ReactComponent as DeleteIcon } from '../../Svg/red-x.svg';
 
 export function ToDo() {
-    const { bg, color, heading } = Color();
+    const { bg, color, partition } = Color();
     const token = useTypedSelector(activeToken)
     const task = useTypedSelector(allTasks);
     const [getTask, { isLoading }] = taskApi.endpoints.getTask.useMutation();
@@ -32,8 +32,8 @@ export function ToDo() {
         <Box fontSize="xl">
             <Box fontSize="m">
                     <AddTask />
-                <Grid templateColumns="repeat(5, 1fr)" >
-                <GridItem colSpan={{base: 5, md: 3}} p={9}>
+                <Grid templateColumns="repeat(5, 1fr)" style={{borderTop: `1px solid ${partition}`}}>
+                <GridItem colSpan={{base: 5, md: 5}} px={{base: 5, md: 10}} py={9} >
                         <List spacing={3}>
                             {task.map((task, i) => 
                                 <ListItem key={i}>
@@ -41,7 +41,7 @@ export function ToDo() {
                                         {/* <i className="fa fa-pencil" style={{color: color, margin: "1% 3%", fontSize: "18px"}}></i> */}
                                         <Text>{task.description}</Text>
                                         <Spacer />
-                                        <Button colorScheme="teal" size="xs"  onClick={() => update(task._id, !task.completed)}>{task.completed ? "Completed" : "Complete"}</Button>
+                                        <Button colorScheme="teal" size="xs"  onClick={() => update(task._id, !task.completed)}>{task.completed ? "Completed" : "Mark as Complete"}</Button>
                                         <Box px={2} onClick={() => removeTask(task._id)} cursor="pointer"><DeleteIcon/></Box>
                                         </Flex>
                                 </ListItem>
