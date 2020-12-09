@@ -42,7 +42,7 @@ export function SignUp() {
                     isClosable: true,
                   })
             }else{
-                push("/todoApp")
+                push("/todoapp")
             }
         })
     }  
