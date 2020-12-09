@@ -15,17 +15,17 @@ export const Route: RouteState[] = [
 
 export const FreeRoute: RouteState[] = [
     {
-        path: "/signup",
+        path: "/todoApp/signup",
         exact: true,
         component: SignUp
     },
     {
-        path: "/todo",
+        path: "/todoApp/todo",
         exact: true,
         component: ToDo
     },
     {
-        path: "/",
+        path: "/todoApp",
         exact: true,
         component: Login
     }

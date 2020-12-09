@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Grid, Text, FormLabel, Input, FormControl, Button } from '@chakra-ui/react'
+import { Box, Grid, Text, FormLabel, Input, FormControl, Button, useToast } from '@chakra-ui/react'
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 import Color from '../../Utils/Color';
 import { todoApi } from '../../Utils/RTKQuery';
@@ -11,7 +11,7 @@ import { UserRegistration } from '../../Login/State/state';
 
 export function SignUp() {
     const { push } = useHistory();
-  
+    const toast = useToast();
     const [formState, setFormState] = useState<UserRegistration>({
         name: "",
         email: "",
@@ -33,18 +33,28 @@ export function SignUp() {
     const [signup, {isLoading}] = loginApi.endpoints.signup.useMutation()
 
     const submit = () => {
-        signup(formState).then(() => push("/"))
+        signup(formState).then((data) => {
+            if(data.error){
+                toast({
+                    title: "Failed to Signup",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                  })
+            }else{
+                push("/todoApp")
+            }
+        })
     }  
 
     return (
         <Box textAlign="center" fontSize="xl">
-            <ColorModeSwitcher justifySelf="flex-end" />
-            <Grid templateColumns="repeat(1, 1fr)" gap={9}>
-                <Box w="50%" bg={bg} shadow="md" px={20} py={10} mx="auto" mt="10%">
+            <Grid templateColumns="repeat(1, 1fr)" gap={5}>
+                <Box w={{sm: "98%", md: "50%"}} bg={bg} shadow="md" px={{base: 10, md: 20}} py={10} mx="auto" mt="10%">
                     <Text fontSize="3xl" color={heading}>SignUp</Text>
                     <FormControl id="name" mt="4" >
                         <FormLabel>Name</FormLabel>
-                        <Input type="text" name="name" value={formState.name} onChange={handleChange}/>
+                         <Input type="text" name="name" value={formState.name} onChange={handleChange}/>
                     </FormControl>
                     <FormControl id="email" mt="4" >
                         <FormLabel>Email address</FormLabel>

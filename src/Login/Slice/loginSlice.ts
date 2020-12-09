@@ -1,5 +1,6 @@
 import { createEntityAdapter, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { stat } from 'fs';
+import { isEmpty, isNil } from 'rambda';
 import { assert } from '../../Utils/assert';
 import { todoApi } from '../../Utils/RTKQuery';
 import { loginApi } from '../../Utils/RTKQuery/loginApi';
@@ -11,8 +12,8 @@ export const loginAdapter = createEntityAdapter<LoginSuccessState>({
 })
 
 export const getToken =() => {
-    let token = localStorage.getItem("token")
-    if(token || token !== "SIGNOUT"){
+    let token = localStorage.getItem("token");
+    if(token && token !== "SIGNOUT"){
         return token
     }
     else{
@@ -63,4 +64,4 @@ export const { logout } = loginSlice.actions;
 
 export default loginSlice.reducer;
 export const selectCurrentUser = (state: RootState) => state.login.user;
-export const activeToken = (state: RootState) => state.login.token !== "" ? state.login.token : localStorage.getItem("token");
+export const activeToken = (state: RootState) => state.login.token !== "" ? state.login.token : getToken();
