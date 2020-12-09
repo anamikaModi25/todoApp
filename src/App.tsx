@@ -1,5 +1,5 @@
 import * as React from "react"
-import { BrowserRouter, Route, Router, Switch } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Router, Switch } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 import { FreeRoute } from "./Configuration/routes";
 import { Header } from "./UniversalComponent/Header/header";
@@ -7,7 +7,7 @@ import { Header } from "./UniversalComponent/Header/header";
 let history = createBrowserHistory();
 
 export const App = () => (
-  <BrowserRouter>
+  <HashRouter>
     <React.Suspense fallback="...Loading">
       <Route path="*" component={Header} />
       <Switch>
@@ -16,7 +16,7 @@ export const App = () => (
         )}
       </Switch>
     </React.Suspense>
-  </BrowserRouter>
+  </HashRouter>
 )
 
 
